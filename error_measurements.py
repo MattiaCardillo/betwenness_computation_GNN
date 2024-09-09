@@ -1,16 +1,7 @@
-def get_betweenness_comparison_table(top_x_exact, top_x_approx, computation_time, computation_time_approx, classification_nodes):
-    import pandas as pd  # Aggiungi questa riga
+# Function to calculate mean squared error manually
+def mean_squared_error(y_true, y_pred):
+    return sum((yt - yp) ** 2 for yt, yp in zip(y_true, y_pred)) / len(y_true)
 
-    # Creazione del DataFrame
-    df = pd.DataFrame({
-        'Rank': range(1, classification_nodes+1),
-        'Exact Calc.': [node for node, _ in top_x_exact],
-        'Approx Calc.': [node for node, _ in top_x_approx],
-        'Exact comp. time': computation_time,
-        'Approx comp. time': computation_time_approx,
-        'Time diff': computation_time - computation_time_approx
-    })
-
-    df['Correct'] = (df['Exact Calc.'] == df['Approx Calc.'])
-
-    return df
+# Function to get top N nodes by betweenness centrality
+def get_top_n_betweenness(betweenness_dict, n):
+    return sorted(betweenness_dict.items(), key=lambda item: item[1], reverse=True)[:n]
