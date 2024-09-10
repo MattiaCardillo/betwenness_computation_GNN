@@ -1,7 +1,10 @@
 import os
 import networkx as nx
 
-def create_graph_from_mtx(file_path):
+def create_graph_from_mtx_library(file_path, library):
+    if(library != None):
+        return library
+    
     # Crea un grafo vuoto
     g = nx.Graph()
 
